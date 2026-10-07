@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Study Plans - Logic &amp; Data Learning Kit</title>
+  <meta name="description" content="Three study tracks: 2-week interview sprint, 4-week beginner foundation, 1-week professional refresher.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main class="container narrow">
+    <h1>Study Plans</h1>
+    <p class="lead">Pick the track that fits you. Each "day" is about <strong>60-90 minutes</strong>.
+      Your progress is saved automatically in this browser.</p>
+
+    <div class="toc-cards">
+      <a class="card lesson-card" href="#sprint"><h3>2-week interview sprint</h3><p>You have an exam coming and know some programming.</p></a>
+      <a class="card lesson-card" href="#beginner"><h3>4-week beginner foundation</h3><p>New to programming, or haven't coded in years.</p></a>
+      <a class="card lesson-card" href="#refresher"><h3>1-week refresher</h3><p>You code at work and want the fundamentals sharp again.</p></a>
+    </div>
+
+    <h2 id="sprint">Track A - 2-week interview sprint</h2>
+    <table>
+      <tr><th>Day</th><th>Focus</th><th>Do</th></tr>
+      <tr><td>1</td><td>Logic warm-up</td><td><a href="lesson.html?id=01">01</a> and <a href="lesson.html?id=02">02</a> - all exercises</td></tr>
+      <tr><td>2</td><td>Functions</td><td><a href="lesson.html?id=03">03</a> - focus on recursion and memoization</td></tr>
+      <tr><td>3</td><td>Arrays I</td><td><a href="lesson.html?id=04">04</a> - two pointers, sliding window</td></tr>
+      <tr><td>4</td><td>Arrays II</td><td><a href="lesson.html?id=04">04</a> - prefix sums, Kadane; redo anything that failed</td></tr>
+      <tr><td>5</td><td>2D arrays</td><td><a href="lesson.html?id=05">05</a> - transpose, rotate, spiral, islands</td></tr>
+      <tr><td>6</td><td>Strings</td><td><a href="lesson.html?id=06">06</a> - all exercises</td></tr>
+      <tr><td>7</td><td>Hash maps + review</td><td><a href="lesson.html?id=07">07</a>, then redo the 3 hardest exercises so far without looking</td></tr>
+      <tr><td>8</td><td>OOP</td><td><a href="lesson.html?id=08">08</a> - learn the 4 pillars answers by heart</td></tr>
+      <tr><td>9</td><td>Search &amp; sort</td><td><a href="lesson.html?id=09">09</a> - write binary search from memory 3 times</td></tr>
+      <tr><td>10</td><td>Stacks, queues, lists</td><td><a href="lesson.html?id=10">10</a> - all exercises</td></tr>
+      <tr><td>11</td><td>Big-O</td><td><a href="lesson.html?id=11">11</a> - say the complexity of every solution out loud</td></tr>
+      <tr><td>12</td><td>SQL basics</td><td><a href="lesson.html?id=12">12</a> - all exercises</td></tr>
+      <tr><td>13</td><td>SQL joins &amp; design</td><td><a href="lesson.html?id=13">13</a> - memorise "2nd highest salary" and "top N per group"</td></tr>
+      <tr><td>14</td><td>Mock exam</td><td><a href="lesson.html?id=14">14</a> under a timer, then read the <a href="cheatsheet.html">cheat sheet</a></td></tr>
+    </table>
+
+    <h2 id="beginner">Track B - 4-week beginner foundation</h2>
+    <table>
+      <tr><th>Week</th><th>Lessons</th><th>Goal</th></tr>
+      <tr><td>1</td><td>01, 02, 03</td><td>Comfortable writing conditions, loops and functions. Run every live example and change it.</td></tr>
+      <tr><td>2</td><td>04, 05, 06</td><td>Manipulate arrays, grids and text confidently. Trace each solution on paper.</td></tr>
+      <tr><td>3</td><td>07, 08, 09, 10</td><td>Know which data structure to pick and why. Build the OOP classes from scratch.</td></tr>
+      <tr><td>4</td><td>11, 12, 13, 14</td><td>Analyse your code, query a database, then pass the mock exam.</td></tr>
+    </table>
+    <blockquote>Rule of thumb: don't open the solution until you've spent <strong>20 minutes</strong> on a problem. Use the hint first.</blockquote>
+
+    <h2 id="refresher">Track C - 1-week professional refresher</h2>
+    <table>
+      <tr><th>Day</th><th>Focus</th></tr>
+      <tr><td>1</td><td>Skim lessons 01-03 and go straight to the exercises; only slow down where a check fails</td></tr>
+      <tr><td>2</td><td>04 + 05 - the array patterns are where most interviewers start</td></tr>
+      <tr><td>3</td><td>06 + 07 - hash-map thinking solves half of all interview problems</td></tr>
+      <tr><td>4</td><td>08 + 10 - OOP vocabulary (SOLID, composition vs inheritance) and classic structures</td></tr>
+      <tr><td>5</td><td>09 + 11 - search/sort trade-offs, explaining Big-O clearly</td></tr>
+      <tr><td>6</td><td>12 + 13 - window functions, CTEs, normalization, indexes, ACID</td></tr>
+      <tr><td>7</td><td>14 mock exam under a timer, then the cheat sheet</td></tr>
+    </table>
+
+    <h2>For mentors and team leads</h2>
+    <ul>
+      <li>Run one lesson per session: the sections are your lecture outline and the live examples are your demo.</li>
+      <li>Ask learners to share a screenshot of their progress on the home page.</li>
+      <li>The interview questions make good discussion prompts - ask before revealing the answer.</li>
+      <li>Pair learners: one types, one explains the logic out loud. Swap every exercise.</li>
+    </ul>
+  </main>
+
+  <footer id="site-footer"></footer>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

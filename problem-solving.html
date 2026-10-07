@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Problem Solving - Logic &amp; Data Learning Kit</title>
+  <meta name="description" content="A 6-step method to solve any logic or coding interview question, plus classic logic puzzles.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main class="container narrow">
+    <h1>How to solve any logic exam question</h1>
+    <p class="lead">Knowing syntax is not enough - interviewers watch <strong>how you think</strong>.
+      Use this method every time. It works for JavaScript, SQL and pen-and-paper puzzles.</p>
+
+    <div class="step-flow">
+      <span>1. Understand</span><span>2. Examples</span><span>3. Brute force</span>
+      <span>4. Optimise</span><span>5. Code</span><span>6. Test</span>
+    </div>
+
+    <h2>1. Understand</h2>
+    <ul>
+      <li>Restate the problem in your own words.</li>
+      <li>Identify the <strong>input</strong> (type, size, range) and the <strong>output</strong> (type, format).</li>
+      <li>Ask: <em>Can it be empty? Negative? Duplicates? Already sorted? Very large?</em></li>
+    </ul>
+
+    <h2>2. Examples</h2>
+    <p>Write 2-3 tiny examples <strong>by hand</strong>, including one edge case.</p>
+<pre><code>twoSum([2, 7, 11, 15], 9)  -&gt;  [0, 1]
+twoSum([3, 3], 6)          -&gt;  [0, 1]
+twoSum([1], 5)             -&gt;  null     // edge case</code></pre>
+
+    <h2>3. Brute force</h2>
+    <p>Say the simplest correct solution out loud, even if it is slow:
+      "Check every pair with two loops - O(n<sup>2</sup>)." A working slow answer beats an unfinished fast one.</p>
+
+    <h2>4. Optimise - ask these questions</h2>
+    <table>
+      <tr><th>Question</th><th>Often leads to</th></tr>
+      <tr><td>Am I searching for something over and over?</td><td><strong>Hash map / Set</strong> (<a href="lesson.html?id=07">lesson 07</a>)</td></tr>
+      <tr><td>Is the input sorted, or can I sort it?</td><td><strong>Binary search / two pointers</strong> (<a href="lesson.html?id=04">04</a>, <a href="lesson.html?id=09">09</a>)</td></tr>
+      <tr><td>Am I looking at a contiguous range?</td><td><strong>Sliding window / prefix sums</strong> (<a href="lesson.html?id=04">04</a>)</td></tr>
+      <tr><td>Do I need the "most recent" or matching pair?</td><td><strong>Stack</strong> (<a href="lesson.html?id=10">10</a>)</td></tr>
+      <tr><td>Does the problem repeat on smaller inputs?</td><td><strong>Recursion + memoization</strong> (<a href="lesson.html?id=03">03</a>)</td></tr>
+      <tr><td>Is it a grid, map or network?</td><td><strong>2D array + BFS/DFS</strong> (<a href="lesson.html?id=05">05</a>)</td></tr>
+      <tr><td>Am I recomputing the same thing?</td><td><strong>Cache it</strong> (Map, prefix array)</td></tr>
+    </table>
+
+    <h2>5. Code</h2>
+    <ul>
+      <li>Use clear names (<code>left</code>, <code>right</code>, <code>seen</code>, <code>count</code>), not <code>a</code>, <code>b</code>, <code>x</code>.</li>
+      <li>Handle edge cases at the top: <code>if (arr.length === 0) return null;</code></li>
+      <li>Extract small helper functions when a step has a name.</li>
+    </ul>
+
+    <h2>6. Test</h2>
+    <ul>
+      <li><strong>Trace</strong> your code line by line with your examples.</li>
+      <li>Check edge cases: empty, one element, all equal, negatives, very large.</li>
+      <li>State the final <strong>time and space complexity</strong> - interviewers always ask.</li>
+    </ul>
+
+    <h2>The SQL version</h2>
+    <ol>
+      <li>Which <strong>tables</strong> hold the data? Which <strong>columns</strong> link them?</li>
+      <li>What does <strong>one output row</strong> represent - one employee? one department?</li>
+      <li>Build in execution order: <code>FROM/JOIN → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT</code>.</li>
+      <li>Check mentally on a small case. Watch for <code>NULL</code> and duplicated rows from joins.</li>
+    </ol>
+
+    <h2>Classic logic puzzles - practise out loud</h2>
+    <details class="qa"><summary>8 balls, one is heavier. Find it with a balance scale in 2 weighings.</summary>
+      <p>Weigh 3 vs 3. If they balance, weigh the remaining 2 - the heavier one wins.
+      If they don't, take the heavier group of 3 and weigh 1 vs 1: the heavier wins, or the third ball if they balance.
+      It's the same "split into groups and eliminate" idea as binary search.</p></details>
+    <details class="qa"><summary>Two ropes each take 60 minutes to burn (unevenly). Measure 45 minutes.</summary>
+      <p>Light rope A at both ends and rope B at one end. A burns out after 30 minutes.
+      Then light the other end of B - it burns out 15 minutes later. Total: 45.</p></details>
+    <details class="qa"><summary>Number sequence: 2, 6, 12, 20, 30, ?</summary>
+      <p>Differences are 4, 6, 8, 10, so the next difference is 12: <strong>42</strong>. The formula is n &times; (n + 1).</p></details>
+    <details class="qa"><summary>All roses are flowers. Some flowers fade quickly. Can we conclude that some roses fade quickly?</summary>
+      <p><strong>No.</strong> The flowers that fade quickly might all be non-roses. In set terms: Roses &sube; Flowers and
+      Fading &cap; Flowers &ne; &empty; does not imply Fading &cap; Roses &ne; &empty;.</p></details>
+    <details class="qa"><summary>A knight always tells the truth, a knave always lies. A says "We are both knaves." What are A and B?</summary>
+      <p>If A were a knight the statement would be true, making A a knave - a contradiction. So A is a <strong>knave</strong>,
+      the statement is false, so they are not both knaves: B is a <strong>knight</strong>.</p></details>
+    <details class="qa"><summary>You have a 3-litre and a 5-litre jug. Measure exactly 4 litres.</summary>
+      <p>Fill the 5, pour into the 3 (5 has 2 left). Empty the 3, pour the 2 in. Fill the 5 again and top up the 3 (needs 1).
+      The 5-litre jug now holds <strong>4</strong>.</p></details>
+    <details class="qa"><summary>A bat and a ball cost $1.10 in total. The bat costs $1.00 more than the ball. How much is the ball?</summary>
+      <p>Not 10 cents! ball + (ball + 1.00) = 1.10, so 2 &times; ball = 0.10: the ball costs <strong>5 cents</strong>.
+      Lesson: write the equation instead of trusting intuition.</p></details>
+  </main>
+
+  <footer id="site-footer"></footer>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Logic &amp; Data Learning Kit</title>
+  <meta name="description" content="Free interactive kit to master programming fundamentals and SQL for logical and technical interview exams. Live code, auto-graded exercises, no install.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Master the fundamentals.<br>Pass the logic exam.</h1>
+      <p class="lead">
+        A free, friendly course on logic, functions, classes, arrays, multi-dimensional arrays,
+        data structures, algorithms and SQL. Every idea is explained in plain English with real-life
+        analogies, live code you can run, quick quizzes and auto-graded exercises - right in your browser.
+        No install, no sign-up.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" id="continue-btn" href="lesson.html?id=01">Start lesson 01 &rarr;</a>
+        <a class="btn" href="study-plan.html">Choose a study plan</a>
+        <a class="btn" href="cheatsheet.html">Exam cheat sheet</a>
+      </div>
+    </section>
+
+    <h2>Choose your path</h2>
+    <section class="audience">
+      <a class="card lesson-card" href="study-plan.html#beginner">
+        <span class="num">&#127891; Student or new to coding</span>
+        <h3>4-week foundation</h3>
+        <p>Start from zero. Every idea comes with a real-life analogy, live examples and step-by-step explanations.</p>
+      </a>
+      <a class="card lesson-card" href="study-plan.html#sprint">
+        <span class="num">&#127919; Exam or interview coming up</span>
+        <h3>2-week interview sprint</h3>
+        <p>Practise the exact patterns logic and technical exams ask for: two pointers, hash maps, recursion, matrices, SQL joins.</p>
+      </a>
+      <a class="card lesson-card" href="study-plan.html#refresher">
+        <span class="num">&#128188; Working professional</span>
+        <h3>1-week refresher</h3>
+        <p>Sharpen the fundamentals you use every day - with "at work" notes linking each topic to real business tasks.</p>
+      </a>
+    </section>
+
+    <section class="card" id="progress" style="margin-bottom:28px">
+      <div class="stats-row">
+        <div class="stat"><div class="v" id="st-level">Level 1</div><div class="l" id="st-level-name">Beginner</div></div>
+        <div class="stat"><div class="v" id="st-xp">0 XP</div><div class="l" id="st-next">+10 XP per exercise, +5 per quiz answer</div></div>
+        <div class="stat"><div class="v" id="st-streak">0 days</div><div class="l">Daily streak - study a little every day</div></div>
+        <div class="stat"><div class="v" id="st-quiz">0</div><div class="l">Quiz questions answered correctly</div></div>
+      </div>
+      <div class="progress-summary">
+        <strong>Exercises</strong>
+        <div class="progress-track"><div class="progress-fill" id="overall-fill" style="width:0%"></div></div>
+        <span id="overall-text">0 / 0 exercises</span>
+        <button class="btn btn-sm" id="reset-progress">Reset</button>
+      </div>
+    </section>
+
+    <h2 style="margin-top:0">Curriculum</h2>
+    <div class="lesson-grid" id="lesson-grid"></div>
+
+    <h2>How each lesson works</h2>
+    <div class="toc-cards">
+      <div class="card"><h3>&#129504; 1. Understand</h3><p>A real-life analogy first, then the idea in plain English with small code snippets.</p></div>
+      <div class="card"><h3>&#9654;&#65039; 2. Experiment</h3><p>Run live examples, read "How it works", then change the code and see what happens.</p></div>
+      <div class="card"><h3>&#10067; 3. Quick quiz</h3><p>"What does this print?" questions with instant feedback and explanations.</p></div>
+      <div class="card"><h3>&#9989; 4. Practise</h3><p>Solve exercises, press <strong>Check</strong>, earn XP. Hints and solutions when you're stuck.</p></div>
+      <div class="card"><h3>&#127908; 5. Interview-proof</h3><p>Answer real interview questions out loud, then compare with model answers.</p></div>
+    </div>
+
+    <h2>Study tips that actually work</h2>
+    <div class="toc-cards">
+      <div class="card"><h3>Guess before you run</h3><p>Predicting the output - even wrongly - makes the right answer stick far better than just reading it.</p></div>
+      <div class="card"><h3>Little and often</h3><p>30 minutes a day beats 4 hours on Sunday. Keep your streak alive &#128293;.</p></div>
+      <div class="card"><h3>Struggle a little</h3><p>Try for 10-20 minutes before opening the solution. Use the hint first.</p></div>
+      <div class="card"><h3>Explain it out loud</h3><p>If you can explain a solution to a friend (or a rubber duck), you really understand it.</p></div>
+      <div class="card"><h3>Come back later</h3><p>Redo an exercise from last week without looking. That's the best exam rehearsal there is.</p></div>
+    </div>
+
+    <h2>Stuck on a word?</h2>
+    <p>The <a href="glossary.html">glossary</a> explains every technical term in plain English, with a tiny example.
+      Heard "polymorphism" or "LEFT JOIN" in a meeting and went blank? Look it up in 10 seconds.</p>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="assets/js/app.js"></script>
+  <script src="lessons/index.js"></script>
+  <script>
+    (function () {
+      const grid = document.getElementById("lesson-grid");
+      const esc = LDL.escapeHtml;
+
+      function render() {
+        let done = 0, total = 0, firstOpen = null;
+        grid.innerHTML = LDL.catalog.map(function (c) {
+          const lesson = LDL.lessons[c.id];
+          const n = lesson ? lesson.exercises.length : 0;
+          const d = lesson ? LDL.progress.countDone(lesson) : 0;
+          done += d; total += n;
+          if (!firstOpen && lesson && d < n) firstOpen = c;
+          const pct = n ? Math.round(100 * d / n) : 0;
+          return '<a class="lesson-card" href="lesson.html?id=' + c.id + '">' +
+            '<span class="num">' + c.id + '</span>' +
+            '<h3>' + esc(c.title) + '</h3>' +
+            '<p>' + esc(c.summary) + '</p>' +
+            '<div class="meta"><span class="tag ' + (c.lang === "sql" ? "tag-sql" : "tag-js") + '">' + (c.lang === "sql" ? "SQL" : "JavaScript") + '</span>' +
+            (lesson ? '<span>' + d + "/" + n + ' <span class="mini-track" style="display:inline-block;vertical-align:middle"><span class="mini-fill" style="display:block;width:' + pct + '%"></span></span></span>' : '<span>coming soon</span>') +
+            '</div></a>';
+        }).join("");
+
+        const xp = LDL.xp(), lv = LDL.level(xp), streak = LDL.activity.streak();
+        let quizRight = 0;
+        LDL.catalog.forEach(function (c) { if (LDL.lessons[c.id]) quizRight += LDL.quizProgress.countCorrect(LDL.lessons[c.id]); });
+        document.getElementById("st-level").textContent = "Level " + lv.number;
+        document.getElementById("st-level-name").textContent = lv.name;
+        document.getElementById("st-xp").textContent = xp + " XP";
+        document.getElementById("st-next").textContent = lv.next
+          ? (lv.next - xp) + " XP to " + lv.nextName
+          : "Top level reached - you're interview ready!";
+        document.getElementById("st-streak").textContent = streak + (streak === 1 ? " day" : " days");
+        document.getElementById("st-quiz").textContent = quizRight;
+        LDL.refreshXp();
+
+        document.getElementById("overall-fill").style.width = (total ? 100 * done / total : 0) + "%";
+        document.getElementById("overall-text").textContent = done + " / " + total + " exercises";
+        const btn = document.getElementById("continue-btn");
+        if (done > 0 && firstOpen) {
+          btn.href = "lesson.html?id=" + firstOpen.id;
+          btn.innerHTML = "Continue: " + esc(firstOpen.id + " " + firstOpen.title) + " &rarr;";
+        }
+      }
+
+      document.getElementById("reset-progress").addEventListener("click", function () {
+        if (confirm("Reset all progress and saved code? This cannot be undone.")) { LDL.progress.reset(); render(); }
+      });
+
+      render();
+      LDL.loadAllLessons().then(render);
+    })();
+  </script>
+</body>
+</html>

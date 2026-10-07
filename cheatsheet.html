@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cheat Sheet - Logic &amp; Data Learning Kit</title>
+  <meta name="description" content="One-page review of programming fundamentals, data structures, algorithms, Big-O and SQL for interview exams.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+  <link rel="stylesheet" id="hljs-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main class="container">
+    <h1>Exam cheat sheet</h1>
+    <p class="lead">Everything on one page - review it the night before. <a href="#" onclick="window.print();return false;">Print it</a> for offline study.</p>
+
+    <div class="cheat-grid">
+
+      <div class="card">
+        <h3>Logic</h3>
+        <table>
+          <tr><th>Rule</th><th>Example</th></tr>
+          <tr><td>De Morgan</td><td><code>!(a &amp;&amp; b) === !a || !b</code></td></tr>
+          <tr><td>Even</td><td><code>n % 2 === 0</code></td></tr>
+          <tr><td>Last digit / drop it</td><td><code>n % 10</code> / <code>Math.floor(n / 10)</code></td></tr>
+          <tr><td>Leap year</td><td><code>(y%4===0 &amp;&amp; y%100!==0) || y%400===0</code></td></tr>
+          <tr><td>Falsy values</td><td><code>false 0 "" null undefined NaN</code></td></tr>
+          <tr><td>Compare strictly</td><td><code>===</code> not <code>==</code></td></tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <h3>Problem → pattern</h3>
+        <table>
+          <tr><th>If you see...</th><th>Try</th></tr>
+          <tr><td>"find pair / seen before"</td><td>Hash map / Set</td></tr>
+          <tr><td>sorted array</td><td>Binary search, two pointers</td></tr>
+          <tr><td>contiguous subarray / substring</td><td>Sliding window, prefix sums</td></tr>
+          <tr><td>max subarray sum</td><td>Kadane</td></tr>
+          <tr><td>brackets, undo, "most recent"</td><td>Stack</td></tr>
+          <tr><td>levels, shortest path in grid</td><td>Queue + BFS</td></tr>
+          <tr><td>grid regions / islands</td><td>DFS / BFS with visited</td></tr>
+          <tr><td>same subproblem repeats</td><td>Recursion + memo</td></tr>
+          <tr><td>top K / K-th smallest</td><td>Sort or heap</td></tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <h3>Big-O</h3>
+        <table>
+          <tr><th>Class</th><th>Typical code</th><th>n = 10<sup>6</sup></th></tr>
+          <tr><td>O(1)</td><td>index, Map get</td><td>1</td></tr>
+          <tr><td>O(log n)</td><td>binary search, halving loop</td><td>~20</td></tr>
+          <tr><td>O(n)</td><td>one loop</td><td>10<sup>6</sup></td></tr>
+          <tr><td>O(n log n)</td><td>good sort</td><td>~2&times;10<sup>7</sup></td></tr>
+          <tr><td>O(n<sup>2</sup>)</td><td>nested loops</td><td>10<sup>12</sup> - too slow</td></tr>
+          <tr><td>O(2<sup>n</sup>)</td><td>naive recursion (fib)</td><td>impossible</td></tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <h3>Data structures</h3>
+        <table>
+          <tr><th>Structure</th><th>Access</th><th>Search</th><th>Insert/delete</th></tr>
+          <tr><td>Array</td><td>O(1)</td><td>O(n)</td><td>end O(1), front/middle O(n)</td></tr>
+          <tr><td>Map / Set</td><td>-</td><td>O(1) avg</td><td>O(1) avg</td></tr>
+          <tr><td>Stack</td><td>top O(1)</td><td>O(n)</td><td>push/pop O(1)</td></tr>
+          <tr><td>Queue</td><td>front O(1)</td><td>O(n)</td><td>enqueue/dequeue O(1)</td></tr>
+          <tr><td>Linked list</td><td>O(n)</td><td>O(n)</td><td>O(1) at known node</td></tr>
+          <tr><td>Sorted array</td><td>O(1)</td><td>O(log n)</td><td>O(n)</td></tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <h3>Sorting</h3>
+        <table>
+          <tr><th>Algorithm</th><th>Best</th><th>Average</th><th>Worst</th><th>Space</th><th>Stable</th></tr>
+          <tr><td>Bubble</td><td>n</td><td>n<sup>2</sup></td><td>n<sup>2</sup></td><td>1</td><td>yes</td></tr>
+          <tr><td>Selection</td><td>n<sup>2</sup></td><td>n<sup>2</sup></td><td>n<sup>2</sup></td><td>1</td><td>no</td></tr>
+          <tr><td>Insertion</td><td>n</td><td>n<sup>2</sup></td><td>n<sup>2</sup></td><td>1</td><td>yes</td></tr>
+          <tr><td>Merge</td><td>n log n</td><td>n log n</td><td>n log n</td><td>n</td><td>yes</td></tr>
+          <tr><td>Quick</td><td>n log n</td><td>n log n</td><td>n<sup>2</sup></td><td>log n</td><td>no</td></tr>
+        </table>
+        <p>JS: <code>[10, 9, 1].sort()</code> gives <code>[1, 10, 9]</code>! Use <code>.sort((a, b) =&gt; a - b)</code>.</p>
+      </div>
+
+      <div class="card">
+        <h3>Binary search template</h3>
+<pre><code class="language-javascript">function binarySearch(arr, target) {
+  let lo = 0, hi = arr.length - 1;
+  while (lo &lt;= hi) {
+    const mid = Math.floor((lo + hi) / 2);
+    if (arr[mid] === target) return mid;
+    if (arr[mid] &lt; target) lo = mid + 1;
+    else hi = mid - 1;
+  }
+  return -1;
+}</code></pre>
+      </div>
+
+      <div class="card">
+        <h3>2D arrays</h3>
+<pre><code class="language-javascript">// Create (each row is a NEW array)
+const grid = Array.from({ length: rows }, () =&gt; Array(cols).fill(0));
+
+// Traverse
+for (let r = 0; r &lt; grid.length; r++)
+  for (let c = 0; c &lt; grid[r].length; c++) { /* grid[r][c] */ }
+
+// 4 neighbours
+const DIRS = [[-1, 0], [1, 0], [0, -1], [0, 1]];
+// Transpose: t[c][r] = m[r][c]
+// Rotate 90° clockwise = transpose, then reverse each row</code></pre>
+      </div>
+
+      <div class="card">
+        <h3>OOP in one line each</h3>
+        <table>
+          <tr><td><strong>Encapsulation</strong></td><td>Hide internal state; expose methods (<code>#balance</code>).</td></tr>
+          <tr><td><strong>Abstraction</strong></td><td>Show what it does, hide how.</td></tr>
+          <tr><td><strong>Inheritance</strong></td><td>A child class reuses a parent (<code>extends</code>, <code>super</code>).</td></tr>
+          <tr><td><strong>Polymorphism</strong></td><td>Same method name, different behaviour per class.</td></tr>
+          <tr><td><strong>Composition</strong></td><td>"has-a" - prefer it over deep "is-a" chains.</td></tr>
+          <tr><td><strong>SOLID</strong></td><td>Single responsibility, Open/closed, Liskov, Interface segregation, Dependency inversion.</td></tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <h3>Recursion checklist</h3>
+        <ol>
+          <li><strong>Base case</strong> - when do I stop?</li>
+          <li><strong>Recursive case</strong> - how do I make the problem smaller?</li>
+          <li>Does every call move toward the base case?</li>
+          <li>Repeated subproblems? Add a memo (<code>Map</code>).</li>
+        </ol>
+<pre><code class="language-javascript">function fact(n) {
+  if (n &lt;= 1) return 1;      // base case
+  return n * fact(n - 1);     // smaller problem
+}</code></pre>
+      </div>
+
+      <div class="card">
+        <h3>SQL execution order</h3>
+<pre><code class="language-sql">FROM / JOIN  →  WHERE  →  GROUP BY  →  HAVING
+             →  SELECT →  DISTINCT  →  ORDER BY  →  LIMIT</code></pre>
+        <ul>
+          <li><code>WHERE</code> filters rows, <code>HAVING</code> filters groups.</li>
+          <li><code>COUNT(*)</code> counts rows; <code>COUNT(col)</code> skips NULLs.</li>
+          <li><code>x = NULL</code> is never true - use <code>IS NULL</code>.</li>
+          <li><code>NOT IN</code> with a NULL in the list returns nothing - prefer <code>NOT EXISTS</code>.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>JOINs</h3>
+        <table>
+          <tr><th>Join</th><th>Keeps</th></tr>
+          <tr><td>INNER</td><td>only matching rows on both sides</td></tr>
+          <tr><td>LEFT</td><td>all left rows; NULLs where no match</td></tr>
+          <tr><td>RIGHT</td><td>all right rows</td></tr>
+          <tr><td>FULL</td><td>all rows from both sides</td></tr>
+          <tr><td>SELF</td><td>table joined to itself (employee → manager)</td></tr>
+          <tr><td>Anti-join</td><td><code>LEFT JOIN ... WHERE right.id IS NULL</code></td></tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <h3>Classic SQL interview queries</h3>
+<pre><code class="language-sql">-- 2nd highest salary
+SELECT MAX(salary) FROM employees
+WHERE salary &lt; (SELECT MAX(salary) FROM employees);
+
+-- Top 2 earners per department
+SELECT * FROM (
+  SELECT name, department_id, salary,
+         DENSE_RANK() OVER (PARTITION BY department_id
+                            ORDER BY salary DESC) AS rnk
+  FROM employees) t
+WHERE rnk &lt;= 2;
+
+-- Duplicates
+SELECT email, COUNT(*) FROM customers
+GROUP BY email HAVING COUNT(*) &gt; 1;</code></pre>
+      </div>
+
+      <div class="card">
+        <h3>Database design</h3>
+        <table>
+          <tr><td><strong>Primary key</strong></td><td>uniquely identifies a row</td></tr>
+          <tr><td><strong>Foreign key</strong></td><td>points to a primary key in another table</td></tr>
+          <tr><td><strong>1NF</strong></td><td>atomic values, no repeating groups</td></tr>
+          <tr><td><strong>2NF</strong></td><td>1NF + no partial dependency on a composite key</td></tr>
+          <tr><td><strong>3NF</strong></td><td>2NF + no transitive dependency (non-key → non-key)</td></tr>
+          <tr><td><strong>Index</strong></td><td>B-tree: fast lookups (O(log n)), slower writes</td></tr>
+          <tr><td><strong>ACID</strong></td><td>Atomicity, Consistency, Isolation, Durability</td></tr>
+        </table>
+      </div>
+
+    </div>
+  </main>
+
+  <footer id="site-footer"></footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/sql.min.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () { LDL.highlightAll(); });</script>
+</body>
+</html>

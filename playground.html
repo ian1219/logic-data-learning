@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Playground - Logic &amp; Data Learning Kit</title>
+  <meta name="description" content="Free-form JavaScript and SQL playground running entirely in your browser.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main class="container narrow">
+    <h1>Playground</h1>
+    <p class="lead">Scratch space for your own experiments. Nothing is graded - just write code and run it.</p>
+
+    <h2 id="js">JavaScript</h2>
+    <div id="js-playground"></div>
+
+    <h2 id="sql">SQL - sample company database</h2>
+    <p>A real SQLite database running in your browser. It resets every time you run a query, so feel free to
+      <code>INSERT</code>, <code>UPDATE</code> or <code>DELETE</code>.</p>
+    <div id="schema"></div>
+    <div id="sql-playground"></div>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/sql/sql.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/matchbrackets.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/closebrackets.min.js"></script>
+
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/sample-db.js"></script>
+  <script src="assets/js/runner.js"></script>
+  <script src="assets/js/editor.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("js-playground").appendChild(LDL.createPlayground({
+        title: "Scratchpad",
+        code: [
+          "// Write any JavaScript and press Run (or Ctrl + Enter).",
+          "function greet(name) {",
+          "  return \"Hello, \" + name + \"!\";",
+          "}",
+          "",
+          "const scores = [72, 95, 88, 61];",
+          "console.log(greet(\"learner\"));",
+          "console.log(\"Highest:\", Math.max(...scores));",
+          "console.log(\"Passed:\", scores.filter(s => s >= 75));"
+        ].join("\n")
+      }, "js"));
+
+      const schema = LDL.sampleDbSchema || [];
+      if (schema.length) {
+        document.getElementById("schema").innerHTML =
+          "<table><tr><th>Table</th><th>Columns</th><th>What it holds</th></tr>" +
+          schema.map(function (t) {
+            return "<tr><td><code>" + LDL.escapeHtml(t.table) + "</code></td><td><code>" +
+              t.columns.map(LDL.escapeHtml).join(", ") + "</code></td><td>" + LDL.escapeHtml(t.description || "") + "</td></tr>";
+          }).join("") + "</table>";
+      }
+
+      document.getElementById("sql-playground").appendChild(LDL.createPlayground({
+        title: "SQL scratchpad",
+        code: "-- List every table in the database\nSELECT name FROM sqlite_master WHERE type = 'table' ORDER BY name;"
+      }, "sql"));
+    });
+  </script>
+</body>
+</html>

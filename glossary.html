@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Glossary - Logic &amp; Data Learning Kit</title>
+  <meta name="description" content="Plain-English definitions of programming, data structure, algorithm and SQL terms, with small examples.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+  <link rel="stylesheet" id="hljs-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main class="container narrow">
+    <h1>Glossary</h1>
+    <p class="lead">Every technical word in the kit, explained in plain English with a tiny example.
+      Heard a term in a meeting or an interview and went blank? Look it up here.</p>
+
+    <input class="search" id="search" type="search" placeholder="Search terms, e.g. array, recursion, JOIN..." aria-label="Search the glossary">
+    <p class="kbd-hint" id="count"></p>
+    <div id="terms"></div>
+  </main>
+
+  <footer id="site-footer"></footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/sql.min.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="lessons/index.js"></script>
+  <script src="assets/js/glossary.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const esc = LDL.escapeHtml;
+      const list = (LDL.glossary || []).slice().sort(function (a, b) { return a.term.localeCompare(b.term); });
+      const box = document.getElementById("terms");
+      const search = document.getElementById("search");
+
+      function lessonTitle(id) {
+        const c = LDL.catalog.find(function (x) { return x.id === id; });
+        return c ? c.id + " " + c.title : "";
+      }
+
+      function render() {
+        const q = search.value.trim().toLowerCase();
+        const shown = list.filter(function (t) {
+          return !q || (t.term + " " + t.definition + " " + (t.aka || "")).toLowerCase().indexOf(q) !== -1;
+        });
+        document.getElementById("count").textContent = shown.length + " of " + list.length + " terms";
+        box.innerHTML = shown.map(function (t) {
+          return '<div class="term" id="' + esc(t.term.toLowerCase().replace(/[^a-z0-9]+/g, "-")) + '">' +
+            "<h3>" + esc(t.term) + (t.aka ? ' <span class="kbd-hint">(' + esc(t.aka) + ")</span>" : "") + "</h3>" +
+            "<p>" + t.definition + "</p>" +
+            (t.example ? '<pre><code class="language-' + (t.lang === "sql" ? "sql" : "javascript") + '">' + esc(t.example) + "</code></pre>" : "") +
+            (t.lesson ? '<a class="tag" href="lesson.html?id=' + esc(t.lesson) + '">Lesson ' + esc(lessonTitle(t.lesson)) + "</a>" : "") +
+            "</div>";
+        }).join("") || "<p>No matching terms. Try a shorter word.</p>";
+        LDL.highlightAll(box);
+      }
+
+      search.addEventListener("input", render);
+      if (location.hash) search.value = decodeURIComponent(location.hash.slice(1)).replace(/-/g, " ");
+      render();
+    });
+  </script>
+</body>
+</html>
